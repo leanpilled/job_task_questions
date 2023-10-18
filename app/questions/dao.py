@@ -14,9 +14,9 @@ class QuestionsDAO:
             await session.commit()
             
     @classmethod
-    async def find_by_id(cls, model_id: int):
+    async def find_by_id(cls, id: int):
         async with async_session_maker() as session:
-            query = select(Questions).filter_by(id=model_id)
+            query = select(Questions).filter_by(question_id=id)
             result = await session.execute(query)
             return result.scalar_one_or_none()
         
