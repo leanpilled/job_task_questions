@@ -1,0 +1,20 @@
+version: "3.1"
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    command: ["/job_task_questions/docker/app.sh"]
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
